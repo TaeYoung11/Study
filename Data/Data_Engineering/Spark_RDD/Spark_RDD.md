@@ -81,6 +81,8 @@ linesRDD = sc.textFile("/path/to/README.md")
 * **coalesce(n):** 파티션 수를 줄일 때 사용 (셔플 최소화).
 * **mapPartitions(f):** 각 파티션 단위로 함수를 적용하여 오버헤드를 줄입니다.
 
+---
+
 ## 4. RDD Action (실행 연산)
 
 실제 계산을 시작하고 결과를 드라이버 프로그램으로 반환하거나 저장합니다.
@@ -106,7 +108,7 @@ sc = SparkContext("local", "Example")
 
 rdd = sc.parallelize (["apple", "banana", "spark", "data"])
 upper_rdd = rdd.map(lambda x: x.upper())
-filtered_rdd upper_rdd.filter(lambda x: "SPARK" in x)
+filtered_rdd = upper_rdd.filter(lambda x: "SPARK" in x)
 
 # 여기까지는 실행되지 않음
 result = filtered_rdd.collect() # 여기서 실제 연산 수행
@@ -120,7 +122,7 @@ result = filtered_rdd.collect() # 여기서 실제 연산 수행
 ```python
 words = sc.parallelize (['one', 'two', 'two', 'three', 'three', 'three'])
 wordCounts = words.map(lambda w: (w, 1)) \
-                  .groupByKey()\
+                  .groupByKey() \
                   .map(lambda pair: (pair[0], sum(pair[1])))
 
 ```
